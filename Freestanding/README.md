@@ -1,5 +1,5 @@
 # Talisker
-## Native components
+## Freestanding components
 
 This directory in a configured build tree will contain the components which
 are built for a freestanding environment on host the machine. It is used

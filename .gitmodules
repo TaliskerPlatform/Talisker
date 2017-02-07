@@ -7,3 +7,6 @@
 [submodule "Library"]
 	path = Library
 	url = git://github.com/TaliskerPlatform/Library.git
+[submodule "Frameworks"]
+	path = Frameworks
+	url = git://github.com/TaliskerPlatform/Frameworks.git

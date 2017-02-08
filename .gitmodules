@@ -1,12 +1,20 @@
 [submodule "UserGuide"]
 	path = Documentation/UserGuide
 	url = git://github.com/TaliskerPlatform/UserGuide.git
+	branch = develop
 [submodule "Developer"]
 	path = Developer
 	url = git://github.com/TaliskerPlatform/Developer.git
+	branch = develop
 [submodule "Library"]
 	path = Library
 	url = git://github.com/TaliskerPlatform/Library.git
+	branch = develop
 [submodule "Frameworks"]
 	path = Frameworks
 	url = git://github.com/TaliskerPlatform/Frameworks.git
+	branch = develop
+[submodule "Personalities"]
+	path = Personalities
+	url = git://github.com/TaliskerPlatform/Personalities.git
+	branch = develop

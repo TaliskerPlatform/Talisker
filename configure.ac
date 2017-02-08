@@ -74,16 +74,25 @@ TAL_CONFIG_SUBDIR([Developer],[Hosted/Developer],,[hosted_subdirs="$hosted_subdi
 TAL_CONFIG_SUBDIR([Applications/SystemStartup],[Hosted/SystemStartup],,[hosted_subdirs="$hosted_subdirs SystemStartup"])
 AC_SUBST([hosted_subdirs])
 
+dnl This can go away once there's a standalone Documentation project
+docs_subdirs=''
+TAL_CONFIG_SUBDIR([Documentation/UserGuide],,,[docs_subdirs="$docs_subdirs UserGuide"])
+AC_SUBST([docs_subdirs])
+
+top_subdirs=''
+TAL_CONFIG_SUBDIR([Library],,,[subdirs="$subdirs Library"])
+TAL_CONFIG_SUBDIR([Personalities],,,[subdirs="$subdirs Personalities"])
+top_subdirs="$top_subdirs Applications Documentation"
+AC_SUBST([top_subdirs])
+
 AC_CONFIG_FILES([
 Makefile
 Build/Makefile
 Freestanding/Makefile
 Native/Makefile
 Hosted/Makefile
-Library/Makefile
 Documentation/Makefile
 Applications/Makefile
-Personalities/Makefile
 ])
 
 AC_OUTPUT

@@ -14,4 +14,4 @@
 
 EXTRA_DIST = README.md
 
-SUBDIRS = @subdirs@
+SUBDIRS = @docs_subdirs@

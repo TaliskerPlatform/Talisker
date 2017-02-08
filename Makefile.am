@@ -14,4 +14,6 @@
 
 EXTRA_DIST = README.md LICENSE-2.0
 
-SUBDIRS = Freestanding Native Hosted Documentation Library Applications Personalities
+DIST_SUBDIRS = Freestanding Native Hosted Documentation Applications
+
+SUBDIRS = Freestanding Native Hosted @top_subdirs@

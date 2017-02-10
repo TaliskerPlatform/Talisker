@@ -80,8 +80,8 @@ TAL_CONFIG_SUBDIR([Documentation/UserGuide],,,[docs_subdirs="$docs_subdirs UserG
 AC_SUBST([docs_subdirs])
 
 top_subdirs=''
-TAL_CONFIG_SUBDIR([Library],,,[subdirs="$subdirs Library"])
-TAL_CONFIG_SUBDIR([Personalities],,,[subdirs="$subdirs Personalities"])
+TAL_CONFIG_SUBDIR([Library],,,[top_subdirs="$top_subdirs Library"])
+TAL_CONFIG_SUBDIR([Personalities],,,[top_subdirs="$top_subdirs Personalities"])
 top_subdirs="$top_subdirs Applications Documentation"
 AC_SUBST([top_subdirs])
 

@@ -41,7 +41,14 @@ TAL_CHECK_DOMAINS
 ##   --target=$host
 
 build_subdirs=''
-TAL_CONFIG_SUBDIR([Developer],[Build/Developer],,[build_subdirs="$build_subdirs Developer"],[$build],[$host],[$build])
+TAL_CONFIG_SUBDIR([Developer],[BuildProducts/Build/Developer],,[build_subdirs="$build_subdirs Developer"
+devtools_builddir="BuildProducts/Build/Developer"
+devtools_build="$build"
+devtools_host="$build"
+devtools_target="$host"
+dnl m4_include([Developer/integration.m4])
+cd "$ac_pwd"
+],[$build],[$host],[$build])
 AC_SUBST([build_subdirs])
 
 ## Next, components which should be built for a freestanding environment -
@@ -62,8 +69,8 @@ elif test x"$host_variant_freestanding" = x"" ; then
 	fi
 else
 	AC_MSG_RESULT([yes (for $host_variant_freestanding)])
-	TAL_CONFIG_SUBDIR([Frameworks/PersonalityKit/ISOC],[Freestanding/ISOC],,[freestanding_subdirs="$freestanding_subdirs ISOC"],[$host_variant_freestanding],[$host_variant_freestanding])
-	TAL_CONFIG_SUBDIR([Applications/SystemStartup],[Freestanding/SystemStartup],,[freestanding_subdirs="$freestanding_subdirs SystemStartup"],[$host_variant_freestanding],[$host_variant_freestanding])
+	TAL_CONFIG_SUBDIR([Personalities],[BuildProducts/Freestanding/Personalities],[--enable-freestanding],[freestanding_subdirs="$freestanding_subdirs Personalities"],[$host_variant_freestanding],[$host_variant_freestanding])
+	TAL_CONFIG_SUBDIR([Applications],[BuildProducts/Freestanding/Applications],[--enable-freestanding],[freestanding_subdirs="$freestanding_subdirs Applications"],[$host_variant_freestanding],[$host_variant_freestanding])
 fi
 AC_SUBST([freestanding_subdirs])
 
@@ -86,8 +93,9 @@ elif test x"$host_variant_native" = x"" ; then
 	fi
 else
 	AC_MSG_RESULT([yes (for $host_variant_native)])
-	TAL_CONFIG_SUBDIR([Frameworks/PersonalityKit],[Native/PersonalityKit],,[native_subdirs="$native_subdirs PersonalityKit"],[$host_variant_native],[$host_variant_native])
-	TAL_CONFIG_SUBDIR([Applications/SystemStartup],[Native/SystemStartup],,[native_subdirs="$native_subdirs SystemStartup"],[$host_variant_native],[$host_variant_native])
+	TAL_CONFIG_SUBDIR([Frameworks],[BuildProducts/Native/Frameworks],[--enable-native],[native_subdirs="$native_subdirs Frameworks"],[$host_variant_native],[$host_variant_native])
+	TAL_CONFIG_SUBDIR([Personalities],[BuildProducts/Native/Personalities],[--enable-native],[native_subdirs="$native_subdirs Personalities"],[$host_variant_native],[$host_variant_native])
+	TAL_CONFIG_SUBDIR([Applications],[BuildProducts/Native/Applications],[--enable-native],[native_subdirs="$native_subdirs Applications"],[$host_variant_native],[$host_variant_native])
 fi
 AC_SUBST([native_subdirs])
 
@@ -106,35 +114,22 @@ elif test x"$host_variant_hosted" = x"" ; then
 	fi
 else
 	AC_MSG_RESULT([yes (for $host_variant_hosted)])
-	TAL_CONFIG_SUBDIR([Frameworks],[Hosted/Frameworks],,[hosted_subdirs="$hosted_subdirs Frameworks"],[$host_variant_hosted],[$host_variant_hosted])
-	TAL_CONFIG_SUBDIR([Developer],[Hosted/Developer],,[hosted_subdirs="$hosted_subdirs Developer"],[$host_variant_hosted],[$host_variant_hosted])
-# Note: it will be important to skip SystemStartup when recursing into
-# the Applications dir, because configuring it in-place may break future
-# configure runs (i.e., if $srcdir=$builddir)
-	TAL_CONFIG_SUBDIR([Applications/SystemStartup],[Hosted/SystemStartup],,[hosted_subdirs="$hosted_subdirs SystemStartup"],[$host_variant_hosted],[$host_variant_hosted])
-	TAL_CONFIG_SUBDIR([Personalities],,,[subdirs="$subdirs Personalities"],[$host_variant_hosted],[$host_variant_hosted])
+	TAL_CONFIG_SUBDIR([Library],[BuildProducts/Hosted/Library],,[hosted_subdirs="$hosted_subdirs Library"],[$host_variant_hosted],[$host_variant_hosted])
+	TAL_CONFIG_SUBDIR([Frameworks],[BuildProducts/Hosted/Frameworks],,[hosted_subdirs="$hosted_subdirs Frameworks"],[$host_variant_hosted],[$host_variant_hosted])
+	TAL_CONFIG_SUBDIR([Developer],[BuildProducts/Hosted/Developer],,[hosted_subdirs="$hosted_subdirs Developer"],[$host_variant_hosted],[$host_variant_hosted])
+	TAL_CONFIG_SUBDIR([Applications],[BuildProducts/Hosted/Applications],,[hosted_subdirs="$hosted_subdirs Applications"],[$host_variant_hosted],[$host_variant_hosted])
+	TAL_CONFIG_SUBDIR([Personalities],[BuildProducts/Hosted/Personalities],,[hosted_subdirs="$hosted_subdirs Personalities"],[$host_variant_hosted],[$host_variant_hosted])
+	TAL_CONFIG_SUBDIR([Documentation],[BuildProducts/Hosted/Documentation],,[hosted_subdirs="$hosted_subdirs Documentation"],[$host_variant_hosted],[$host_variant_hosted])
 fi
 AC_SUBST([hosted_subdirs])
 
-dnl This can go away once Documentation is a stand-alone project
-docs_subdirs=''
-TAL_CONFIG_SUBDIR([Documentation/UserGuide],,,[docs_subdirs="$docs_subdirs UserGuide"])
-AC_SUBST([docs_subdirs])
-
-top_subdirs=''
-TAL_CONFIG_SUBDIR([Library],,,[top_subdirs="$top_subdirs Library"])
-TAL_CONFIG_SUBDIR([Personalities],,,[top_subdirs="$top_subdirs Personalities"])
-top_subdirs="$top_subdirs Applications Documentation"
-AC_SUBST([top_subdirs])
-
 AC_CONFIG_FILES([
 Makefile
-Build/Makefile
-Freestanding/Makefile
-Native/Makefile
-Hosted/Makefile
-Documentation/Makefile
-Applications/Makefile
+BuildProducts/Makefile
+BuildProducts/Build/Makefile
+BuildProducts/Freestanding/Makefile
+BuildProducts/Native/Makefile
+BuildProducts/Hosted/Makefile
 ])
 
 AC_OUTPUT

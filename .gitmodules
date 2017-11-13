@@ -1,7 +1,3 @@
-[submodule "UserGuide"]
-	path = Documentation/UserGuide
-	url = git://github.com/TaliskerPlatform/UserGuide.git
-	branch = develop
 [submodule "Developer"]
 	path = Developer
 	url = git://github.com/TaliskerPlatform/Developer.git
@@ -18,3 +14,7 @@
 	path = Personalities
 	url = git://github.com/TaliskerPlatform/Personalities.git
 	branch = develop
+[submodule "Applications"]
+	path = Applications
+	url = git://github.com/TaliskerPlatform/Applications.git
+	branch = Core

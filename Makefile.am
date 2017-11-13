@@ -14,6 +14,4 @@
 
 EXTRA_DIST = README.md LICENSE-2.0
 
-DIST_SUBDIRS = Freestanding Native Hosted Documentation Applications
-
-SUBDIRS = Freestanding Native Hosted @top_subdirs@
+SUBDIRS = BuildProducts

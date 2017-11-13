@@ -1,4 +1,4 @@
-## Talisker: Personalities
+## Talisker
 
 ## Copyright 2017 Mo McRoberts.
 ##
@@ -14,4 +14,5 @@
 ##  See the License for the specific language governing permissions and
 ##  limitations under the License.
 
-EXTRA_DIST = README.md
+SUBDIRS = Build Freestanding Native Hosted
+

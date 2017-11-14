@@ -69,6 +69,7 @@ elif test x"$host_variant_freestanding" = x"" ; then
 	fi
 else
 	AC_MSG_RESULT([yes (for $host_variant_freestanding)])
+	TAL_CONFIG_SUBDIR([Kernels],[BuildProducts/Freestanding/Kernels],[--enable-freestanding],[freestanding_subdirs="$freestanding_subdirs Kernels"],[$host_variant_freestanding],[$host_variant_freestanding])
 	TAL_CONFIG_SUBDIR([Personalities],[BuildProducts/Freestanding/Personalities],[--enable-freestanding],[freestanding_subdirs="$freestanding_subdirs Personalities"],[$host_variant_freestanding],[$host_variant_freestanding])
 	TAL_CONFIG_SUBDIR([Applications],[BuildProducts/Freestanding/Applications],[--enable-freestanding],[freestanding_subdirs="$freestanding_subdirs Applications"],[$host_variant_freestanding],[$host_variant_freestanding])
 fi
@@ -79,7 +80,8 @@ AC_SUBST([freestanding_subdirs])
 ## must be made directly, because there is no C Library to to perform them.
 ##
 ## XXX building certain native components (e.g., a libc) should make it
-## possible 
+## possible to build hosted components when it otherwise wouldn't be.
+
 AC_MSG_CHECKING([whether native components should be built])
 AC_ARG_ENABLE([native],[AS_HELP_STRING([--disable-native],[do not build native components (default=auto)])],[should_build_native=$enableval],[should_build_native=auto])
 
